@@ -32,8 +32,8 @@ const fileStorageEngine = multer.diskStorage({
     let pathimage = path.join(
       // "D:/Adee infotech/AKSHAY/developerzonehere-countrydelight-dfe810547ff2/src/",
       // "uploads"
-      "./Uploads",
-      "Images"
+      "./uploads",
+      "images"
     );
     if (!fs.existsSync(pathimage)) {
       fs.mkdirSync(pathimage, { recursive: true });
