@@ -1,7 +1,7 @@
 const db = require("../models");
 const Login = db.users;
 const Op = db.Sequelize.Op;
-const bcrypt = require("bcrypt");
+const crypto = require('crypto')
 const saltRounds = 10;
 // Create and Save a new Tutorial
 exports.login = async (req, res) => {
@@ -22,11 +22,10 @@ exports.login = async (req, res) => {
 
   console.log("dd", dd);
   if (dd) {
-    encryptedPassword = await bcrypt.compare(
-      req.body.password,
-      dd.dataValues.password
-    );
-    if (encryptedPassword === true) {
+   encryptedPassword = crypto.createHash('sha1').update(req.body.password).digest('hex')
+   console.log('first',encryptedPassword,dd.dataValues.password,'check',encryptedPassword === dd.dataValues.password)
+  
+    if (encryptedPassword === dd.dataValues.password) {
       res.status(200).send({
         message: "Login Succeed!",
         status: true,
