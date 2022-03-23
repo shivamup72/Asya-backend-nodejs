@@ -16,7 +16,7 @@ exports.create = async (req, res) => {
   } else {
     console.log("first,", req.body);
     // const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds);
-    const encryptedPassword = crypto.createHash('sha1').update(password).digest('hex')
+    const encryptedPassword = crypto.createHash('sha1').update(req.body.password).digest('hex')
     if (
       !req.body.name &&
       !req.body.email &&
