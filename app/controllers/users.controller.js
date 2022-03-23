@@ -1,11 +1,10 @@
 const db = require("../models");
 const Users = db.users;
 const Op = db.Sequelize.Op;
-const crypto = require('crypto')
+const crypto = require("crypto");
 const saltRounds = 10;
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
-
   let dd = await Users.findOne({ where: { email: req.body.email } });
   console.log("dd", dd);
   if (dd) {
@@ -16,7 +15,10 @@ exports.create = async (req, res) => {
   } else {
     console.log("first,", req.body);
     // const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds);
-    const encryptedPassword = crypto.createHash('sha1').update(req.body.password).digest('hex')
+    const encryptedPassword = crypto
+      .createHash("sha1")
+      .update(req.body.password)
+      .digest("hex");
     if (
       !req.body.name &&
       !req.body.email &&
@@ -30,9 +32,9 @@ exports.create = async (req, res) => {
     }
     // Create a Tutorial
     const users = {
-      name: req.body.first + " " + req.body.last,
+      name: req.body.name,
       email: req.body.email,
-     // phone: req.body.phone,
+      // phone: req.body.phone,
       password: encryptedPassword,
       // status: req.body.status,
       // thumbnail: req.body.thumbnail,
@@ -43,7 +45,11 @@ exports.create = async (req, res) => {
     // Save Tutorial in the database
     Users.create(users)
       .then((data) => {
-        res.send(data);
+        res.status(500).send({
+          message: "signup successfully.",
+          data: data,
+          status: true,
+        });
       })
       .catch((err) => {
         res.status(500).send({
