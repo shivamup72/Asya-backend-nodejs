@@ -23,4 +23,5 @@ db.role = require("./Role.js")(sequelize, Sequelize);
 db.customer = require("./Customers.js")(sequelize, Sequelize);
 db.cuisines = require("./Cuisines.js")(sequelize, Sequelize);
 db.restaurants = require("./Restaurants")(sequelize, Sequelize);
+db.Food_categories = require("./Food_categories")(sequelize, Sequelize);
 module.exports = db;

@@ -21,6 +21,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATE,
         defaultValue:new Date()
       },
+      updated_at :{
+        type: Sequelize.DATE,
+        defaultValue:new Date()
+      },
   });
   return Cuisines
 };
