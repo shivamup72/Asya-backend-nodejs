@@ -1,7 +1,7 @@
 module.exports = app => {
     const Food_categories = require("../controllers/food_categories.controller");
     var router = require("express").Router();
-    router.post("/", Login.login);
+    //router.post("/", Login.login);
     // // Retrieve all Tutorials
      router.get("/", Food_categories.findAll);
     // // Retrieve all published Tutorials
