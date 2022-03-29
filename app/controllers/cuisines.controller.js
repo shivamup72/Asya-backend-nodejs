@@ -1,6 +1,6 @@
 
 const db = require("../models");
-const   Cuisines = db.cuisines;
+const Cuisines = db.cuisines;
 const Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {

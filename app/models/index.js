@@ -9,7 +9,10 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle
-  }
+  },
+  define: {
+    timestamps: false
+  },
 });
 const db = {};
 db.Sequelize = Sequelize;
@@ -19,4 +22,5 @@ db.users = require("./Users.js")(sequelize, Sequelize);
 db.role = require("./Role.js")(sequelize, Sequelize);
 db.customer = require("./Customers.js")(sequelize, Sequelize);
 db.cuisines = require("./Cuisines.js")(sequelize, Sequelize);
+db.restaurants = require("./Restaurants")(sequelize, Sequelize);
 module.exports = db;

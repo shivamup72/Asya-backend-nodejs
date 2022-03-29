@@ -1,50 +1,55 @@
-const { sequelize } = require("../models");
+
 const db = require("../models");
 const Users = require("../models/Users");
 const Customers = db.customer;
 const Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
-  //   if (dd) {
-  //     res.status(400).send({
-  //       message: "Allready SIGNUP WITH THIS EMAIL ID",
-  //       status: false,
-  //     });
-  //   } else {
-  console.log("first,", req.body);
-  //const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds);
-  if (!req.body.houseno && !req.body.landmark && !req.body.city) {
+  const { address } = req.body;
+  console.log("first,", address);
+  if (!address[0]) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
     return;
   }
-  // Create a Tutorial
-  const customers = {
-    address_1:
-      req.body.houseno + " ," + req.body.landmark + " ," + req.body.city,
-    coordinate_1: req.body.coordinate,
-    user_id: req.body.user_id,
-  };
-  // Save Tutorial in the database
-  Customers.create(customers)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the testing.",
-      });
+  else {
+    let check = [];
+    let ff = await Customers.findOne({
+      where: { user_id: 24 },
     });
-  //}
+    console.log("ff", check, address);
+    if (!ff || ff === null || ff !== undefined) {
+      Customers.bulkCreate(address)
+        .then((data) => {
+          res.send(data);
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while creating the testing.",
+          });
+        });
+    } else {
+      check.push(ff.dataValues);
+      const fdata = await address.filter((itemA) => {
+        return check.find((itemB) => {
+          return (
+            // itemA.customer._id !== itemB.ProfileId._id &&
+            itemA.address_1 !== itemB.address_1 ||
+            itemA.address_2 !== itemB.address_2
+          );
+        });
+      });
+      console.log("first", fdata);
+    }
+  }
 };
-
 /////
 exports.findAll = (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  Customers.findAll({})
+  Customers.findAll()
     .then((data) => {
       res.send(data);
     })

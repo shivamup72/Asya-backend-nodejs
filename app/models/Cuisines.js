@@ -1,4 +1,5 @@
 
+
 module.exports = (sequelize, Sequelize) => {
   const Cuisines = sequelize.define("cuisines", {
     name : {
@@ -15,6 +16,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     created_by: {
         type: Sequelize.INTEGER,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        defaultValue:new Date()
       },
   });
   return Cuisines

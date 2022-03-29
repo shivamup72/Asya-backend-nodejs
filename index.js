@@ -26,6 +26,7 @@ require("./app/routes/role.routes")(app);
 require("./app/routes/login.routes")(app);
 require("./app/routes/customer.routes")(app);
 require("./app/routes/cuisines.routes")(app);
+require("./app/routes/restaurants.routes")(app);
 app.use("/uploads", express.static("uploads"));
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -55,7 +56,7 @@ app.post("/cuisineimg", cuisinesImage, (req, res) => {
   res.send("cuisinesImage file upload succecsfuly"+req.file);
 });
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8085;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
