@@ -24,4 +24,22 @@ db.customer = require("./Customers.js")(sequelize, Sequelize);
 db.cuisines = require("./Cuisines.js")(sequelize, Sequelize);
 db.restaurants = require("./Restaurants")(sequelize, Sequelize);
 db.Food_categories = require("./Food_categories")(sequelize, Sequelize);
+db.Food_menus = require("./Food_menus")(sequelize, Sequelize);
+
+
+db.sequelize.sync({force:false})
+.then(()=>{
+  console.log("yes re sync done")
+})
+// db.Food_categories.hasOne(db.Food_menus,{
+//   foreignKey:"category_id",
+//   as:"food_menus"
+// })
+
+// db.Food_menus.belongsTo(db.Food_categories,{
+//   foreignKey:"category_id",
+//   as:"food_categories"
+// })
+///food category with food menus
+
 module.exports = db;

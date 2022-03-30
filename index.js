@@ -28,6 +28,7 @@ require("./app/routes/customer.routes")(app);
 require("./app/routes/cuisines.routes")(app);
 require("./app/routes/restaurants.routes")(app);
 require("./app/routes/food_categories.routes")(app);
+require("./app/routes/food_menus.routes")(app);
 app.use("/uploads", express.static("uploads"));
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
