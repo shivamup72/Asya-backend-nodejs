@@ -49,10 +49,10 @@ exports.findOne = (req, res) => {
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   console.log(
     "req.param.id",
-    req.param.id === undefined ? "no id" : req.param.id
+    req.param.id === undefined ? "no id" : req.param.id,req.params.id
   );
-  Food_menus.findOne({
-    where: { category_id: req.param.id },
+  Food_menus.findAll({
+    where: { category_id:req.params.id },
   })
     .then((data) => {
       res.send(data);
