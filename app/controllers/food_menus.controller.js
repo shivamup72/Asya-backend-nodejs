@@ -43,3 +43,24 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+exports.findOne = (req, res) => {
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  console.log(
+    "req.param.id",
+    req.param.id === undefined ? "no id" : req.param.id
+  );
+  Food_menus.findOne({
+    where: { category_id: req.param.id },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Food_menus.",
+      });
+    });
+};
