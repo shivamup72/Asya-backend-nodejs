@@ -47,7 +47,7 @@ const Op = db.Sequelize.Op;
     // const title = req.query.title;
     // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   Restaurants.findOne({
-    where:{id:id}
+    where:{id:req.params.id}
   })
       .then(data => {
         res.send(data);
