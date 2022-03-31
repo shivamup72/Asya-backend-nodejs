@@ -25,8 +25,8 @@ db.cuisines = require("./Cuisines.js")(sequelize, Sequelize);
 db.restaurants = require("./Restaurants")(sequelize, Sequelize);
 db.Food_categories = require("./Food_categories")(sequelize, Sequelize);
 db.Food_menus = require("./Food_menus")(sequelize, Sequelize);
-
-
+db.Variant_options = require("./Variant_options")(sequelize, Sequelize);
+db.Variants = require("./Variants")(sequelize, Sequelize);
 db.sequelize.sync({force:false})
 .then(()=>{
   console.log("yes re sync done")
