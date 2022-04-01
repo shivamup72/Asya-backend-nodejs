@@ -21,3 +21,20 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+
+exports.findone= (req, res) => {
+  console.log("req.params.id",req.params.id) 
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  Variant_options.findAll({where:{menu_id:req.params.id}})
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Variant_options.",
+      });
+    });
+};

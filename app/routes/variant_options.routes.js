@@ -12,7 +12,7 @@ module.exports = app => {
  // Update a Tutorial with id
  //router.post("/verify", Users.Verify);
     // // Delete a Tutorial with id
-    // router.delete("/:id", tutorials.delete);
+     router.get("/:id", Variant_options.findone);
     // // Delete all Tutorials
     // router.delete("/", tutorials.deleteAll);
     app.use('/api/variant_options', router);
