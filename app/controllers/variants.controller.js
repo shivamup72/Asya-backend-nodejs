@@ -29,7 +29,7 @@ exports.findone = (req, res) => {
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   Variants.findAll({ where: { menu_id: req.params.id } })
     .then((data) => {
-      res.status(200).send({ ...data, selected: false });
+      res.status(200).send(data);
     })
     .catch((err) => {
       res.status(500).send({
