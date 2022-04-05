@@ -90,32 +90,28 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const {user_id,address_1,coordinate_1} =req.body;
   console.log('req.body',user_id,address_1,coordinate_1)
-  res.status(500).send({
-          message:req.body
-           
-        });
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  // Customers.findOne({ where: { user_id: user_id } })
-  //   .then((data) => {
-  //     if (!data || data === null) {
-  //       res.status(400).send({
-  //         status: false,
-  //         message: "NO Customer Adress with this profile",
-  //       });
-  //     } else {
-  //       await Customers.update(
-  //         {  address_1:address_1,
-  //           coordinate_1:coordinate_1
-  //         },
-  //         { where: {user_id: user_id } }
-  //       )
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     res.status(500).send({
-  //       message:
-  //         err.message || "Some error occurred while updating address.",
-  //     });
-  //   });
+  Customers.findOne({ where: { user_id: user_id } })
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
+          status: false,
+          message: "NO Customer Adress with this profile",
+        });
+      } else {
+        await Customers.update(
+          { address_1:address_1,
+            coordinate_1:coordinate_1
+          },
+          { where: {user_id: user_id } }
+        )
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while updating address.",
+      });
+    });
 };
