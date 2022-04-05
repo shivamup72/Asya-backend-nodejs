@@ -87,12 +87,12 @@ exports.findOne = (req, res) => {
 };
 
 
-exports.update = (req, res) => {
+exports.update =async (req, res) => {
   const {user_id,address_1,coordinate_1} =req.body;
   console.log('req.body',user_id,address_1,coordinate_1)
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  Customers.findOne({ where: { user_id: user_id } })
+ await Customers.findOne({ where: { user_id: user_id } })
     .then((data) => {
       if (!data || data === null) {
         res.status(400).send({
