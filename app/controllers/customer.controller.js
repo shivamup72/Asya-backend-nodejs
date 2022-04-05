@@ -29,7 +29,11 @@ exports.create = async (req, res) => {
       };
       Customers.create(Address)
         .then((data) => {
-          res.send(data);
+          res.status(200).send({
+            status: true,
+            data:data,
+            message: "address update Successfully",
+          })
         })
         .catch((err) => {
           res.status(500).send({
