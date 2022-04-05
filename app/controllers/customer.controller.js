@@ -6,40 +6,74 @@ const Op = db.Sequelize.Op;
 exports.create = async (req, res) => {
   const { address } = req.body;
   console.log("first,", address);
-  if (!address[0]) {
+  if (!address.address_1 && !address.coordinate_1) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: "Address can not be empty!",
     });
-    return;
   } else {
-    let check = [];
     let ff = await Customers.findOne({
-      where: { user_id: 24 },
+      where: { user_id: address.user_id },
     });
-    console.log("ff", check, address);
-    if (!ff || ff === null || ff !== undefined) {
-      Customers.bulkCreate(address)
+
+    if (!ff || ff === null || ff === undefined) {
+      const Address = {
+        address_1: address.address_1,
+        address_2: address.address_2,
+        address_3: address.address_3,
+        coordinate_1: address.coordinate_1,
+        coordinate_2: address.coordinate_2,
+        coordinate_3: address.coordinate_3,
+        user_id: address.user_id,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      };
+      Customers.create(Address)
         .then((data) => {
           res.send(data);
         })
         .catch((err) => {
           res.status(500).send({
             message:
-              err.message || "Some error occurred while creating the testing.",
+              err.message || "Some error occurred while creating the Adress.",
           });
         });
     } else {
-      check.push(ff.dataValues);
-      const fdata = await address.filter((itemA) => {
-        return check.find((itemB) => {
-          return (
-            // itemA.customer._id !== itemB.ProfileId._id &&
-            itemA.address_1 !== itemB.address_1 ||
-            itemA.address_2 !== itemB.address_2
-          );
-        });
-      });
-      console.log("first", fdata);
+      Customers.update(
+        {
+          address_1:
+            address.address_1 === null ? ff.address_1 : address.address_1,
+          address_2:
+            address.address_2 === null ? ff.address_2 : address.address_2,
+          address_3:
+            address.address_3 === null ? ff.address_2 : address.address_3,
+          coordinate_1:
+            address.coordinate_1 === null
+              ? ff.coordinate_1
+              : address.coordinate_1,
+          coordinate_2:
+            address.coordinate_2 === null
+              ? ff.coordinate_2
+              : address.coordinate_2,
+          coordinate_3:
+            ff.coordinate_3 === null ? ff.coordinate_3 : address.coordinate_3,
+          user_id: address.user_id === null ? ff.user_id : address.user_id,
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        },
+        { where: { user_id: ff.user_id } }
+      )
+        .then((result) =>
+          res.status(200).send({
+            status: true,
+            message: "address update Successfully",
+          })
+        )
+        .catch((err) =>
+          res.status(500).send({
+            status: false,
+            message: err || "address Update Unsuccessful",
+          })
+        );
     }
   }
 };
@@ -90,21 +124,21 @@ exports.updatefirstAddress = async (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   await Customers.findOne({ where: { user_id: user_id } })
-    .then( (data) => {
+    .then((data) => {
       if (!data || data === null) {
         res.status(400).send({
           status: false,
           message: "NO Customer Adress with this profile",
         });
       } else {
-         Customers.update(
+        Customers.update(
           { address_1: address_1, coordinate_1: coordinate_1 },
           { where: { user_id: user_id } }
         )
           .then((result) =>
             res.status(200).send({
               status: true,
-              data:req.body,
+              data: req.body,
               message: "Address Update  Successfully",
             })
           )
@@ -123,28 +157,66 @@ exports.updatefirstAddress = async (req, res) => {
     });
 };
 
-
 exports.updatesecondAddress = async (req, res) => {
   const { user_id, address_2, coordinate_2 } = req.body;
   console.log("req.body", user_id, address_2, coordinate_2);
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   await Customers.findOne({ where: { user_id: user_id } })
-    .then( (data) => {
+    .then((data) => {
       if (!data || data === null) {
         res.status(400).send({
           status: false,
           message: "NO Customer Adress with this profile",
         });
       } else {
-         Customers.update(
+        Customers.update(
           { address_2: address_2, coordinate_2: coordinate_2 },
           { where: { user_id: user_id } }
         )
           .then((result) =>
             res.status(200).send({
               status: true,
-              data:req.body,
+              data: req.body,
+              message: "Address Update  Successfully",
+            })
+          )
+          .catch((err) =>
+            res.status(500).send({
+              status: false,
+              message: err || "Address Update  Unsuccessful",
+            })
+          );
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while updating address.",
+      });
+    });
+};
+
+exports.updatethirdAddress = async (req, res) => {
+  const { user_id, address_3, coordinate_3 } = req.body;
+  console.log("req.body", user_id, address_2, coordinate_2);
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  await Customers.findOne({ where: { user_id: user_id } })
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
+          status: false,
+          message: "NO Customer Adress with this profile",
+        });
+      } else {
+        Customers.update(
+          { address_3: address_3, coordinate_3: coordinate_3 },
+          { where: { user_id: user_id } }
+        )
+          .then((result) =>
+            res.status(200).send({
+              status: true,
+              data: req.body,
               message: "Address Update  Successfully",
             })
           )

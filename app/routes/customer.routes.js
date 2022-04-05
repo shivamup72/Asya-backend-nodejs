@@ -6,7 +6,9 @@ module.exports = app => {
     // // Retrieve all Tutorials
    router.get("/getcustomer", Customers.findAll);
     // // Retrieve all published Tutorials
-    router.post("/update", Customers.updatefirstAddress);
+    router.post("/updatefirst", Customers.updatefirstAddress);
+    router.post("/updatesecond", Customers.updatesecondAddress);
+    router.post("/updatethird", Customers.updatethirdAddress);
     // // Retrieve a single Tutorial with id
      router.get("/getcustomer/:id", Customers.findOne);
     // // Update a Tutorial with id
