@@ -7,16 +7,16 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     coordinate_1: {
-      type: Sequelize.JSON,
+      type: Sequelize.STRING,
     },
     address_2: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
     },
     coordinate_2: {
       type: Sequelize.STRING,
     },
     address_3: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
     },
     coordinate_3: {
       type: Sequelize.STRING,
