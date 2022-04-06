@@ -203,7 +203,7 @@ exports.updatesecondAddress = async (req, res) => {
 
 exports.updatethirdAddress = async (req, res) => {
   const { user_id, address_3, coordinate_3 } = req.body;
-  console.log("req.body", user_id, address_2, coordinate_2);
+ // console.log("req.body", user_id, address_2, coordinate_2);
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   await Customers.findOne({ where: { user_id: user_id } })
