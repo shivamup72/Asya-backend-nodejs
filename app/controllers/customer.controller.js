@@ -1,3 +1,4 @@
+
 const db = require("../models");
 const Users = require("../models/Users");
 const Customers = db.customer;
@@ -216,6 +217,126 @@ exports.updatethirdAddress = async (req, res) => {
         Customers.update(
           { address_3: address_3, coordinate_3: coordinate_3 },
           { where: { user_id: user_id } }
+        )
+          .then((result) =>
+            res.status(200).send({
+              status: true,
+              data: req.body,
+              message: "Address Update  Successfully",
+            })
+          )
+          .catch((err) =>
+            res.status(500).send({
+              status: false,
+              message: err || "Address Update  Unsuccessful",
+            })
+          );
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while updating address.",
+      });
+    });
+};
+
+
+
+
+///////
+
+exports.deletefirstAddress = async (req, res) => {
+  const { id} = req.params;
+  console.log("req.body", id); // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  await Customers.findOne({ where: { user_id: id } })
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
+          status: false,
+          message: "NO Customer Adress with this profile",
+        });
+      } else {
+        Customers.update(
+          { address_1: null, coordinate_1: null },
+          { where: { user_id: id } }
+        )
+          .then((result) =>
+            res.status(200).send({
+              status: true,
+              message: "Address delete  Successfully",
+            })
+          )
+          .catch((err) =>
+            res.status(500).send({
+              status: false,
+              message: err || "Address Update  Unsuccessful",
+            })
+          );
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while updating address.",
+      });
+    });
+};
+
+exports.deletesecondAddress = async (req, res) => {
+  const { id} = req.params;
+  console.log("req.body", id);
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  await Customers.findOne({ where: { user_id: id } })
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
+          status: false,
+          message: "NO Customer Adress with this profile",
+        });
+      } else {
+        Customers.update(
+          { address_2: null, coordinate_2: null },
+          { where: { user_id: id } }
+        )
+          .then((result) =>
+            res.status(200).send({
+              status: true,
+   
+              message: "Address Update  Successfully",
+            })
+          )
+          .catch((err) =>
+            res.status(500).send({
+              status: false,
+              message: err || "Address Update  Unsuccessful",
+            })
+          );
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while updating address.",
+      });
+    });
+};
+
+exports.deletethirdAddress = async (req, res) => {
+  const { id} = req.params;
+  console.log("req.body", id);
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  await Customers.findOne({ where: { user_id: id } })
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
+          status: false,
+          message: "NO Customer Adress with this profile",
+        });
+      } else {
+        Customers.update(
+          { address_3: null, coordinate_3: null },
+          { where: { user_id: id } }
         )
           .then((result) =>
             res.status(200).send({
