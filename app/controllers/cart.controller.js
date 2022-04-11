@@ -33,7 +33,8 @@ exports.create = async (req, res) => {
   let check = await Cart.findOne({
     where: { customer_id: customer_id, menu_id: menu_id },
   });
-  if (!check) {
+  console.log("first", check);
+  if ( check !== null) {
     Cart.update(
       {
         customer_id: customer_id,
@@ -103,9 +104,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  // const title = req.query.title;
-  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-    Cart.findAll({ where: { customer_id: req.params.id } })
+  Cart.findAll({ where: { customer_id: req.params.id } })
     .then((data) => {
       if (!data || data === null) {
         res.status(400).send({
