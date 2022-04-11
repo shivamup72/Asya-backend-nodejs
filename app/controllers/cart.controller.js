@@ -102,27 +102,27 @@ exports.findAll = (req, res) => {
     });
 };
 
-// exports.findOne = (req, res) => {
-//   // const title = req.query.title;
-//   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-//   Customers.findOne({ where: { user_id: req.params.id } })
-//     .then((data) => {
-//       if (!data || data === null) {
-//         res.status(400).send({
-//           status: false,
-//           message: "NO Customer Adress with this profile",
-//         });
-//       } else {
-//         res.send({
-//           status: true,
-//           data: data,
-//         });
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while retrieving tutorials.",
-//       });
-//     });
-// };
+exports.findOne = (req, res) => {
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    Cart.findAll({ where: { customer_id: req.params.id } })
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
+          status: false,
+          message: "NO cart found",
+        });
+      } else {
+        res.send({
+          status: true,
+          data: data,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials.",
+      });
+    });
+};
