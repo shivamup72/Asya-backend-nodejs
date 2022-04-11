@@ -11,7 +11,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.pool.idle
   },
   define: {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
   },
 });
 const db = {};
@@ -27,6 +28,7 @@ db.Food_categories = require("./Food_categories")(sequelize, Sequelize);
 db.Food_menus = require("./Food_menus")(sequelize, Sequelize);
 db.Variant_options = require("./Variant_options")(sequelize, Sequelize);
 db.Variants = require("./Variants")(sequelize, Sequelize);
+db.Cart = require("./Cart")(sequelize, Sequelize);
 db.sequelize.sync({force:false})
 .then(()=>{
   console.log("yes re sync done")
