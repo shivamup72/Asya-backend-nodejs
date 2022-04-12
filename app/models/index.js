@@ -29,6 +29,7 @@ db.Food_menus = require("./Food_menus")(sequelize, Sequelize);
 db.Variant_options = require("./Variant_options")(sequelize, Sequelize);
 db.Variants = require("./Variants")(sequelize, Sequelize);
 db.Cart = require("./Cart")(sequelize, Sequelize);
+db.Addons = require("./Addons")(sequelize, Sequelize);
 db.sequelize.sync({force:false})
 .then(()=>{
   console.log("yes re sync done")
@@ -42,6 +43,9 @@ db.sequelize.sync({force:false})
 //   foreignKey:"category_id",
 //   as:"food_categories"
 // })
-///food category with food menus
+
+
+db.Food_menus.hasOne(db.Cart,{foreignKey:'menu_id'}); 
+db.Cart.belongsTo(db.Food_menus ,{foreignKey:'menu_id'});
 
 module.exports = db;

@@ -9,10 +9,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     menu_id: {
       type: Sequelize.INTEGER,
-      references: {
-        model: "food_menus",
-        key: "id",
-      },
+      // references: {
+      //   model: "food_menus",
+      //   key: "id",
+      // },
     },
     restaurant_id: {
       type: Sequelize.INTEGER,

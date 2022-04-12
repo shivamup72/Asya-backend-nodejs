@@ -1,5 +1,6 @@
 const db = require("../models");
 const Cart = db.Cart;
+const Food_menus = db.Food_menus;
 const Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
@@ -92,7 +93,13 @@ exports.create = async (req, res) => {
 exports.findAll = (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  Cart.findAll({})
+  Cart.findAll({
+    include: [{
+      model: Food_menus,
+    
+      required: true,
+    }]
+  })
     .then((data) => {
       res.send(data);
     })
@@ -104,7 +111,12 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  Cart.findAll({ where: { customer_id: req.params.id } })
+  Cart.findAll({ where: { customer_id: req.params.id },
+    include: [{
+      model: Food_menus,
+    
+      required: true,
+    }] })
     .then((data) => {
       if (!data || data === null) {
         res.status(400).send({
