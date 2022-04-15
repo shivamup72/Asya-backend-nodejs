@@ -137,3 +137,28 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+
+exports.removeOne = (req, res) => {
+  const {customer_id , menu_id }= req.body;
+  Cart.destroy({ where: { customer_id:customer_id , menu_id:menu_id  }})
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
+          status: false,
+          message: "NO cart found",
+        });
+      } else {
+        res.send({
+          status: true,
+          data: data,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials.",
+      });
+    });
+};
