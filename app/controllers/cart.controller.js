@@ -149,7 +149,7 @@ exports.removeOne = (req, res) => {
           message: "NO cart found",
         });
       } else {
-        res.send({
+        res.send({  
           status: true,
           data: data,
         });
