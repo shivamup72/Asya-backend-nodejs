@@ -64,7 +64,7 @@ app.post("/cuisineimg", cuisinesImage, (req, res) => {
   res.send("cuisinesImage file upload succecsfuly"+req.file);
 });
 // set port, listen for requests
-const PORT = process.env.PORT || 8085;
+const PORT = process.env.PORT || 8086;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
