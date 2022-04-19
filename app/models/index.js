@@ -31,6 +31,7 @@ db.Variants = require("./Variants")(sequelize, Sequelize);
 db.Cart = require("./Cart")(sequelize, Sequelize);
 db.Addons = require("./Addons")(sequelize, Sequelize);
 db.Payment_settings = require("./Payment_settings")(sequelize, Sequelize);
+db.Orders = require("./Orders")(sequelize, Sequelize);
 db.sequelize.sync({force:false})
 .then(()=>{
   console.log("yes re sync done")

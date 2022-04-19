@@ -20,6 +20,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
     },
     order_preparing_at: {
+      type: Sequelize.INTEGER,
     },
     order_prepared_at: {
       type: Sequelize.INTEGER,
