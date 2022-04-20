@@ -1,6 +1,6 @@
 const db = require("../models");
 // const Cart = db.Cart;
-const Orders = db.Orders;
+const Order_details = db.Order_details;
 const Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
     // total_delivery_charge,
     // total_vat_amount,
     // grand_total
-    order
+    orderdetails
   } = req.body;
   console.log("first,", req.body);
 
@@ -29,8 +29,8 @@ exports.create = async (req, res) => {
     // !total_vat_amount &&
     // !grand_total
 
-    !order&&
-    order[0] === undefined
+    !orderdetails&&
+    orderdetails[0] === undefined
   ) {
     res.status(400).send({
       message: "Content can not be empty!",
@@ -51,7 +51,7 @@ exports.create = async (req, res) => {
     //   variant_id: variant_id,
     // };
     // Save Tutorial in the database
-    Orders.create(order)
+    Order_details.create(orderdetails)
       .then((data) => {
         res.send(data);
       })
@@ -68,7 +68,7 @@ exports.create = async (req, res) => {
 exports.findAll = (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  Orders.findAll()
+  Order_details.findAll()
     .then((data) => {
       res.send(data);
     })

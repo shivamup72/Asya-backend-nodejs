@@ -33,6 +33,7 @@ db.Addons = require("./Addons")(sequelize, Sequelize);
 db.Addons = require("./Orders")(sequelize, Sequelize);
 db.Payment_settings = require("./Payment_settings")(sequelize, Sequelize);
 db.Orders = require("./Orders")(sequelize, Sequelize);
+db.Order_details = require("./Order_details")(sequelize, Sequelize);
 db.sequelize.sync({force:false})
 .then(()=>{
   console.log("yes re sync done")
@@ -50,5 +51,9 @@ db.sequelize.sync({force:false})
 
 db.Food_menus.hasOne(db.Cart,{foreignKey:'menu_id'}); 
 db.Cart.belongsTo(db.Food_menus ,{foreignKey:'menu_id'});
+
+
+db.users.hasOne(db.Orders,{foreignKey:'customer_id '}); 
+db.Orders.belongsTo(db.users,{foreignKey:'customer_id'});
 
 module.exports = db;

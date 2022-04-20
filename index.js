@@ -34,6 +34,7 @@ require("./app/routes/variants.routes")(app);
 require("./app/routes/cart.routes")(app);
 require("./app/routes/addon.routes")(app);
 require("./app/routes/orders.routes")(app);
+require("./app/routes/order_details.routes")(app);
 require("./app/routes/payment_settings.routes")(app);
 app.use("/uploads", express.static("uploads"));
 const fileStorageEngine = multer.diskStorage({
