@@ -3,7 +3,6 @@ module.exports = (sequelize, Sequelize) => {
       order_code: {
         type: Sequelize.STRING,
       },
-
       menu_id: {
         type: Sequelize.INTEGER,
       },
@@ -20,13 +19,13 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
       },
       note: {
-        type: Sequelize.Text,
+        type: Sequelize.TEXT,
       },
       variant_id: {
         type: Sequelize.INTEGER,
       },
       addons: {
-        type: Sequelize.Text,
+        type: Sequelize.TEXT,
       },
     });
     return Order_details;
