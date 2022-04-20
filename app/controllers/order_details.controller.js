@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
     // total_delivery_charge,
     // total_vat_amount,
     // grand_total
-    orderdetails
+    orderdetails,
   } = req.body;
   console.log("first,", req.body);
 
@@ -29,7 +29,7 @@ exports.create = async (req, res) => {
     // !total_vat_amount &&
     // !grand_total
 
-    !orderdetails&&
+    !orderdetails &&
     orderdetails[0] === undefined
   ) {
     res.status(400).send({
@@ -38,30 +38,28 @@ exports.create = async (req, res) => {
     return;
   }
 
-    // Create a Tutorial
-    // const cart = {
-    //   customer_id: customer_id,
-    //   menu_id: menu_id,
-    //   restaurant_id: restaurant_id,
-    //   servings: servings,
-    //   quantity: quantity,
-    //   price: pricing,
-    //   note: note,
-    //   addons: addons,
-    //   variant_id: variant_id,
-    // };
-    // Save Tutorial in the database
-    Order_details.create(orderdetails)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the cart.",
-        });
+  // Create a Tutorial
+  // const cart = {
+  //   customer_id: customer_id,
+  //   menu_id: menu_id,
+  //   restaurant_id: restaurant_id,
+  //   servings: servings,
+  //   quantity: quantity,
+  //   price: pricing,
+  //   note: note,
+  //   addons: addons,
+  //   variant_id: variant_id,
+  // };
+  // Save Tutorial in the database
+  Order_details.create(orderdetails)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the cart.",
       });
-
+    });
 };
 
 // /////
@@ -80,7 +78,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-    Orders.findAll({ where: { customer_id: req.params.id }})
+  Orders.findAll({ where: { customer_id: req.params.id } })
     .then((data) => {
       if (!data || data === null) {
         res.status(400).send({
@@ -102,7 +100,6 @@ exports.findOne = (req, res) => {
     });
 };
 
-
 // exports.removeOne = (req, res) => {
 //   const {customer_id , menu_id }= req.body;
 //   Cart.destroy({ where: { customer_id:customer_id , menu_id:menu_id  }})
@@ -113,7 +110,7 @@ exports.findOne = (req, res) => {
 //           message: "NO cart found",
 //         });
 //       } else {
-//         res.send({  
+//         res.send({
 //           status: true,
 //           data: data,
 //         });
