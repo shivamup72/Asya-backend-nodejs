@@ -34,6 +34,7 @@ db.Addons = require("./Orders")(sequelize, Sequelize);
 db.Payment_settings = require("./Payment_settings")(sequelize, Sequelize);
 db.Orders = require("./Orders")(sequelize, Sequelize);
 db.Order_details = require("./Order_details")(sequelize, Sequelize);
+db.Reviews = require("./Reviews")(sequelize, Sequelize);
 db.sequelize.sync({force:false})
 .then(()=>{
   console.log("yes re sync done")
@@ -48,12 +49,26 @@ db.sequelize.sync({force:false})
 //   as:"food_categories"
 // })
 
+db.customer.hasOne(db.Orders,{foreignKey:'customer_id',targetKey: 'user_id' }); 
+db.Orders.belongsTo(db.customer,{as: 'address',foreignKey:'customer_id',targetKey: 'user_id'});
 
 db.Food_menus.hasOne(db.Cart,{foreignKey:'menu_id'}); 
 db.Cart.belongsTo(db.Food_menus ,{foreignKey:'menu_id'});
 
 
-db.users.hasOne(db.Orders,{foreignKey:'customer_id '}); 
-db.Orders.belongsTo(db.users,{foreignKey:'customer_id'});
+db.Food_menus.hasOne(db.Order_details,{foreignKey:'menu_id'}); 
+db.Order_details.belongsTo(db.Food_menus ,{as: 'menu',foreignKey:'menu_id'});
+
+
+db.restaurants.hasOne(db.Order_details,{foreignKey:'restaurant_id'}); 
+db.Order_details.belongsTo(db.restaurants ,{as: 'restaurants',foreignKey:'restaurant_id'});
+
+
+db.Variant_options.hasOne(db.Order_details,{foreignKey:'variant_id'}); 
+db.Order_details.belongsTo(db.Variant_options ,{as: 'variant',foreignKey:'variant_id'});
+
+
+db.Addons.hasOne(db.Order_details,{foreignKey:'addons'}); 
+db.Order_details.belongsTo(db.Addons,{as: 'addon',foreignKey:'addons'});
 
 module.exports = db;

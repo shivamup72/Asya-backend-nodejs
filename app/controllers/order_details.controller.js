@@ -1,5 +1,8 @@
 const db = require("../models");
-// const Cart = db.Cart;
+const Food_menus = db.Food_menus;
+const Addons = db.Addons;
+const Variant_options = db.Variant_options;
+const  Restaurants= db.restaurants;
 const Order_details = db.Order_details;
 const Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
@@ -66,7 +69,31 @@ exports.create = async (req, res) => {
 exports.findAll = (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  Order_details.findAll()
+  Order_details.findAll(
+    {
+      include: [{
+        model: Food_menus,
+       as: 'menu',
+       required: false,
+      },
+      {
+        model:Restaurants ,
+       as: 'restaurants',
+       required: false,
+      },
+      {
+        model:Variant_options ,
+       as: 'variant',
+        required: false,
+      },
+      {
+        model:Addons,
+       as: 'addon',
+        required: false,
+      },
+    ]
+    }
+  )
     .then((data) => {
       res.send(data);
     })

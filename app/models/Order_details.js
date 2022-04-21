@@ -3,9 +3,9 @@ module.exports = (sequelize, Sequelize) => {
       order_code: {
         type: Sequelize.STRING,
       },
-      menu_id: {
-        type: Sequelize.INTEGER,
-      },
+      // menu_id: {
+      //   type: Sequelize.INTEGER,
+      // },
       servings: {
         type: Sequelize.STRING,
       },
@@ -15,18 +15,18 @@ module.exports = (sequelize, Sequelize) => {
       total: {
         type: Sequelize.STRING,
       },
-      restaurant_id: {
-        type: Sequelize.INTEGER,
-      },
+      // restaurant_id: {
+      //   type: Sequelize.INTEGER,
+      // },
       note: {
         type: Sequelize.TEXT,
       },
-      variant_id: {
-        type: Sequelize.INTEGER,
-      },
-      addons: {
-        type: Sequelize.TEXT,
-      },
+      // variant_id: {
+      //   type: Sequelize.INTEGER,
+      // },
+      // addons: {
+      //   type: Sequelize.TEXT,
+      // },
     });
     return Order_details;
   };

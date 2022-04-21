@@ -3,10 +3,9 @@ module.exports = (sequelize, Sequelize) => {
     code: {
       type: Sequelize.STRING,
     },
-    customer_id: {
-      type: Sequelize.INTEGER,
-    },
-
+    // customer_id: {
+    //   type: Sequelize.INTEGER,
+    // },
     customer_address_id: {
       type: Sequelize.INTEGER,
     },
