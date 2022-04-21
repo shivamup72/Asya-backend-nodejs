@@ -162,3 +162,36 @@ exports.removeOne = (req, res) => {
       });
     });
 };
+
+exports.removeAll = (req, res) => {
+  const {cartdata }= req.body;
+  if (cartdata[0] == undefined) {
+    cartdata.map((str)=>{
+      Cart.destroy({ where: { customer_id:str.customer_id , menu_id:str.menu_id  }})
+      .then((data) => {
+        if (!data || data === null) {
+          res.status(400).send({
+            status: false,
+            message: "NO cart found",
+          });
+        } else {
+          res.send({  
+            status: true,
+            data: data,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials.",
+        });
+      });
+    })
+  } else {
+     res.send({  
+          status: false,
+          message: 'no data in the cart ',
+        });
+  }
+}

@@ -11,7 +11,7 @@ module.exports = app => {
     // // Update a Tutorial with id
     router.post("/remove", Cart.removeOne);
     // // Delete a Tutorial with id
-    // router.delete("/:id", tutorials.delete);
+    router.post("/removeall", Cart.removeAll);
     // // Delete all Tutorials
     // router.delete("/", tutorials.deleteAll);
     app.use('/api/cart', router);
