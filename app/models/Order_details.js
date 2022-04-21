@@ -18,9 +18,9 @@ module.exports = (sequelize, Sequelize) => {
       restaurant_id: {
         type: Sequelize.INTEGER,
       },
-      note: {
-        type: Sequelize.TEXT,
-      },
+      // note: {
+      //   type: Sequelize.TEXT,
+      // },
       variant_id: {
         type: Sequelize.INTEGER,
       },
