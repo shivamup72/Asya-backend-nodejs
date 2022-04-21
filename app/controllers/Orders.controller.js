@@ -79,28 +79,28 @@ exports.findAll = (req, res) => {
     });
 };
 
-// exports.findOne = (req, res) => {
-//     Orders.findAll({ where: { customer_id: req.params.id }})
-//     .then((data) => {
-//       if (!data || data === null) {
-//         res.status(400).send({
-//           status: false,
-//           message: "NO cart found",
-//         });
-//       } else {
-//         res.send({
-//           status: true,
-//           data: data,
-//         });
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while retrieving tutorials.",
-//       });
-//     });
-// };
+exports.findOne = (req, res) => {
+    Orders.findAll({ where: { customer_id: req.params.id }})
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
+          status: false,
+          message: "NO cart found",
+        });
+      } else {
+        res.send({
+          status: true,
+          data: data,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials.",
+      });
+    });
+};
 
 
 // exports.removeOne = (req, res) => {
