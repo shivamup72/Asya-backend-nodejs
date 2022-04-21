@@ -51,7 +51,7 @@ exports.create = async (req, res) => {
   //   variant_id: variant_id,
   // };
   // Save Tutorial in the database
-  Orders.create(order)
+  Orders.bulkCreate(order)
     .then((data) => {
       res.send(data);
     })
