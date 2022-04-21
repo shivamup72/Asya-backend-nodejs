@@ -164,9 +164,9 @@ exports.removeOne = (req, res) => {
 };
 
 exports.removeAll = (req, res) => {
-  const {cartdata }= req.body;
-  if (cartdata[0] == undefined) {
-    cartdata.map((str)=>{
+  const {Cartdata }= req.body;
+  if (Cartdata[0] == undefined) {
+    Cartdata.map((str)=>{
       Cart.destroy({ where: { customer_id:str.customer_id , menu_id:str.menu_id  }})
       .then((data) => {
         if (!data || data === null) {
