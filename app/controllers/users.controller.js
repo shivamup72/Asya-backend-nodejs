@@ -116,7 +116,7 @@ exports.updatepassword = async (req, res) => {
       .then((data) => {
         res.status(500).send({
           message: "update password successfully.",
-          data: {data},
+         // data: {data},
           status: true,
         });
       })
