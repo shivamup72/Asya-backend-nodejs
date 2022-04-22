@@ -134,42 +134,56 @@ exports.updatepassword = async (req, res) => {
 exports.updateemail = async (req, res) => {
   console.log("first", req.body);
 
-  let dd = await Users.findOne({
-    where: { email: req.body.email, id: req.body.id },
+  let ff = await Users.findOne({
+    where: { email: req.body.email },
   });
-  console.log("dd", dd);
-  if (dd) {
-    res.status(400).send({
-      message: "Email ID allready Present",
+
+  if (ff) {
+    res.status(500).send({
+      message: "YThis Email ID allReady Register.",
+      // data: {data},
       status: false,
     });
   } else {
-    if (!req.body.email) {
+    let dd = await Users.findOne({
+      where: { email: req.body.email, id: req.body.id },
+    });
+    console.log("dd", dd);
+    if (dd) {
       res.status(400).send({
-        message: "Content can not be empty!",
+        message: "Email ID allready Present",
+        status: false,
       });
-      return;
-    }
-
-    Users.update(
-      {
-        email: req.body.email,
-      },
-      {
-        where: { id: req.body.id },
+    } else {
+      if (!req.body.email) {
+        res.status(400).send({
+          message: "Content can not be empty!",
+        });
+        return;
       }
-    )
-      .then(() => {
-        res.status(500).send({
-          message: "update Email successfully.",
-          // data: {data},
-          status: true,
+  
+      Users.update(
+        {
+          email: req.body.email,
+        },
+        {
+          where: { id: req.body.id },
+        }
+      )
+        .then(() => {
+          res.status(200).send({
+            message: "update Email successfully.",
+            // data: {data},
+            status: true,
+          });
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message: err.message || "Some error occurred while updating email.",
+          });
         });
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || "Some error occurred while updating email.",
-        });
-      });
+    }
   }
+
+  
 };
