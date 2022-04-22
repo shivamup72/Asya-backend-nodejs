@@ -77,3 +77,54 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+
+exports.updatepassword = async (req, res) => {
+  console.log("first", req.body);
+  const encryptedPassword = crypto
+      .createHash("sha1")
+      .update(req.body.password)
+      .digest("hex");
+  let dd = await Users.findOne({ where: { password: encryptedPassword,id:req.body.id} });
+  console.log("dd", dd);
+  if (!dd) {
+    res.status(400).send({
+      message: "User Not Found",
+      status: false,
+    });
+  } else {
+    console.log("first,", req.body);
+    const newencryptedPassword= crypto
+    .createHash("sha1")
+    .update(req.body.newpassword)
+    .digest("hex")
+     console.log("newencryptedPassword",newencryptedPassword);
+    if (
+      !req.body.newpassword
+    ) {
+      res.status(400).send({
+        message: "Content can not be empty!",
+      });
+      return;
+    }
+   
+    Users.update({
+      password:newencryptedPassword 
+     }, {
+      where: { id: req.body.id }
+     })
+      .then((data) => {
+        res.status(500).send({
+          message: "update password successfully.",
+          data: {data},
+          status: true,
+        });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the testing.",
+        });
+      });
+  }
+};
