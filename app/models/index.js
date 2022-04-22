@@ -68,7 +68,7 @@ db.Variant_options.hasOne(db.Order_details,{foreignKey:'variant_id'});
 db.Order_details.belongsTo(db.Variant_options ,{as: 'variant',foreignKey:'variant_id'});
 
 
-db.Addons.hasOne(db.Order_details,{foreignKey:'addons'}); 
-db.Order_details.belongsTo(db.Addons,{as: 'addon',foreignKey:'addons'});
+db.Addons.hasOne(db.Order_details,{foreignKey:'addons',allowNull: true}); 
+db.Order_details.belongsTo(db.Addons,{as: 'addon',foreignKey:'addons',allowNull: true});
 
 module.exports = db;

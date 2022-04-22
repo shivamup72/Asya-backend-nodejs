@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
     // grand_total
     orderdetails,
   } = req.body;
-  console.log("first,", req.body);
+  console.log("first,",orderdetails, req.body);
 
   if (
     // !code &&
