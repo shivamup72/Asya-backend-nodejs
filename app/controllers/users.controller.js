@@ -34,7 +34,12 @@ exports.create = async (req, res) => {
     }
     // Create a Tutorial
     const users = {
-      name: req.body.first + " " + req.body.last,
+      name:
+        req.body.first === undefined
+          ? " "
+          : req.body.first + " " + req.body.last === undefined
+          ? " "
+          : req.body.last,
       email: req.body.email,
       // phone: req.body.phone,
       password: encryptedPassword,
@@ -161,7 +166,7 @@ exports.updateemail = async (req, res) => {
         });
         return;
       }
-  
+
       Users.update(
         {
           email: req.body.email,
@@ -184,6 +189,52 @@ exports.updateemail = async (req, res) => {
         });
     }
   }
+};
 
-  
+exports.updatename = async (req, res) => {
+  let name =
+    req.body.first === undefined
+      ? " "
+      : req.body.first + " " + req.body.last === undefined
+      ? " "
+      : req.body.last;
+  console.log("name", name);
+  let dd = await Users.findOne({
+    where: { name: name, id: req.body.id },
+  });
+  console.log("dd", dd);
+  if (dd) {
+    res.status(400).send({
+      message: "Name AllReady Present",
+      status: false,
+    });
+  } else {
+    if (!name) {
+      res.status(400).send({
+        message: "Content can not be empty!",
+      });
+      return;
+    }
+
+    Users.update(
+      {
+        name: name,
+      },
+      {
+        where: { id: req.body.id },
+      }
+    )
+      .then(() => {
+        res.status(200).send({
+          message: "update Email successfully.",
+          // data: {data},
+          status: true,
+        });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "Some error occurred while updating email.",
+        });
+      });
+  }
 };

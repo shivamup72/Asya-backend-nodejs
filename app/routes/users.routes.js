@@ -9,8 +9,10 @@ module.exports = app => {
    router.post("/updatepassword", users.updatepassword);
     // // Retrieve a single Tutorial with id
     router.post("/updateemail", users.updateemail);
+ // // Update a Tutorial with id
+    router.post("/updatename", users.updatename);
     // router.get("/:id", tutorials.findOne);
-    // // Update a Tutorial with id
+   
     // router.put("/:id", tutorials.update);
     // // Delete a Tutorial with id
     // router.delete("/:id", tutorials.delete);
