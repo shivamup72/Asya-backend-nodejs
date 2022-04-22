@@ -5,7 +5,7 @@ const crypto = require("crypto");
 const saltRounds = 10;
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
-  console.log('first',req.body)
+  console.log("first", req.body);
   let dd = await Users.findOne({ where: { email: req.body.email } });
   console.log("dd", dd);
   if (dd) {
@@ -34,22 +34,22 @@ exports.create = async (req, res) => {
     }
     // Create a Tutorial
     const users = {
-      name: req.body.first+req.body.last,
+      name: req.body.first + " " + req.body.last,
       email: req.body.email,
       // phone: req.body.phone,
       password: encryptedPassword,
       // status: req.body.status,
-       thumbnail:'placeholder.png',
-      // role_id: req.body.role_id,
-      createdAt:Date.now(),
-      updatedAt:Date.now()
+      //  thumbnail:'placeholder.png',
+      // // role_id: req.body.role_id,
+      // createdAt:Date.now(),
+      // updatedAt:Date.now()
     };
     // Save Tutorial in the database
     Users.create(users)
       .then((data) => {
         res.status(500).send({
           message: "signup successfully.",
-          data: data,
+          data: {data},
           status: true,
         });
       })
