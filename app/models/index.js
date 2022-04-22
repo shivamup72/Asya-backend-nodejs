@@ -30,7 +30,6 @@ db.Variant_options = require("./Variant_options")(sequelize, Sequelize);
 db.Variants = require("./Variants")(sequelize, Sequelize);
 db.Cart = require("./Cart")(sequelize, Sequelize);
 db.Addons = require("./Addons")(sequelize, Sequelize);
-db.Addons = require("./Orders")(sequelize, Sequelize);
 db.Payment_settings = require("./Payment_settings")(sequelize, Sequelize);
 db.Orders = require("./Orders")(sequelize, Sequelize);
 db.Order_details = require("./Order_details")(sequelize, Sequelize);

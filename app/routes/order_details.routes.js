@@ -7,7 +7,7 @@ module.exports = app => {
     // // Retrieve all published Tutorials
     // router.get("/published", tutorials.findAllPublished);
     // // Retrieve a single Tutorial with id
-    //router.get("/:id", Order_details.loginProfile);
+    router.get("/:code", Order_details.findOne);
     // // Update a Tutorial with id
     // router.put("/:id", tutorials.update);
     // // Delete a Tutorial with id
