@@ -164,34 +164,26 @@ exports.removeOne = (req, res) => {
 };
 
 exports.removeAll = (req, res) => {
-  const {Cartdata }= req.body;
-  if (Cartdata[0] == undefined) {
-    Cartdata.map((str)=>{
-      Cart.destroy({ where: { customer_id:str.customer_id , menu_id:str.menu_id  }})
-      .then((data) => {
-        if (!data || data === null) {
-          res.status(400).send({
-            status: false,
-            message: "NO cart found",
-          });
-        } else {
-          res.send({  
-            status: true,
-            data: data,
-          });
-        }
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tutorials.",
-        });
-      });
-    })
-  } else {
-     res.send({  
+  //const customer_id  = req.params.id;
+  console.log('first',req.params.id)
+  Cart.destroy({ where: { customer_id:req.params.id }})
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
           status: false,
-          message: 'no data in the cart ',
+          message: "NO cart found",
         });
-  }
-}
+      } else {
+        res.send({  
+          status: true,
+          data: data,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials.",
+      });
+    });
+};
