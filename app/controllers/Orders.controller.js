@@ -53,7 +53,10 @@ exports.create = async (req, res) => {
   // Save Tutorial in the database
   Orders.bulkCreate(order)
     .then((data) => {
-      res.send(data);
+      res.status(200).send({
+        status: true,
+        data: data,
+      });
     })
     .catch((err) => {
       res.status(500).send({
