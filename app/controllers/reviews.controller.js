@@ -53,7 +53,7 @@ exports.create = async (req, res) => {
 //   } else {
     // Create a Tutorial
     const reviews = {
-        order_code : order_code,
+        order_code : code,
         menu_id :menu_id ,
         customer_id : customer_id,
         rating :rating ,
