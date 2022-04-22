@@ -8,6 +8,7 @@ module.exports = app => {
     // // Retrieve all published Tutorials
    router.post("/updatepassword", users.updatepassword);
     // // Retrieve a single Tutorial with id
+    router.post("/updateemail", users.updateemail);
     // router.get("/:id", tutorials.findOne);
     // // Update a Tutorial with id
     // router.put("/:id", tutorials.update);

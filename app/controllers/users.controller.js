@@ -49,7 +49,7 @@ exports.create = async (req, res) => {
       .then((data) => {
         res.status(500).send({
           message: "signup successfully.",
-          data: {data},
+          data: { data },
           status: true,
         });
       })
@@ -78,14 +78,15 @@ exports.findAll = (req, res) => {
     });
 };
 
-
 exports.updatepassword = async (req, res) => {
   console.log("first", req.body);
   const encryptedPassword = crypto
-      .createHash("sha1")
-      .update(req.body.password)
-      .digest("hex");
-  let dd = await Users.findOne({ where: { password: encryptedPassword,id:req.body.id} });
+    .createHash("sha1")
+    .update(req.body.password)
+    .digest("hex");
+  let dd = await Users.findOne({
+    where: { password: encryptedPassword, id: req.body.id },
+  });
   console.log("dd", dd);
   if (!dd) {
     res.status(400).send({
@@ -94,29 +95,30 @@ exports.updatepassword = async (req, res) => {
     });
   } else {
     console.log("first,", req.body);
-    const newencryptedPassword= crypto
-    .createHash("sha1")
-    .update(req.body.newpassword)
-    .digest("hex")
-     console.log("newencryptedPassword",newencryptedPassword);
-    if (
-      !req.body.newpassword
-    ) {
+    const newencryptedPassword = crypto
+      .createHash("sha1")
+      .update(req.body.newpassword)
+      .digest("hex");
+    console.log("newencryptedPassword", newencryptedPassword);
+    if (!req.body.newpassword) {
       res.status(400).send({
         message: "Content can not be empty!",
       });
       return;
     }
-   
-    Users.update({
-      password:newencryptedPassword 
-     }, {
-      where: { id: req.body.id }
-     })
+
+    Users.update(
+      {
+        password: newencryptedPassword,
+      },
+      {
+        where: { id: req.body.id },
+      }
+    )
       .then((data) => {
         res.status(500).send({
           message: "update password successfully.",
-         // data: {data},
+          // data: {data},
           status: true,
         });
       })
@@ -124,6 +126,49 @@ exports.updatepassword = async (req, res) => {
         res.status(500).send({
           message:
             err.message || "Some error occurred while creating the testing.",
+        });
+      });
+  }
+};
+
+exports.updateemail = async (req, res) => {
+  console.log("first", req.body);
+
+  let dd = await Users.findOne({
+    where: { email: req.body.email, id: req.body.id },
+  });
+  console.log("dd", dd);
+  if (dd) {
+    res.status(400).send({
+      message: "Email ID allready Present",
+      status: false,
+    });
+  } else {
+    if (!req.body.email) {
+      res.status(400).send({
+        message: "Content can not be empty!",
+      });
+      return;
+    }
+
+    Users.update(
+      {
+        email: req.body.email,
+      },
+      {
+        where: { id: req.body.id },
+      }
+    )
+      .then(() => {
+        res.status(500).send({
+          message: "update Email successfully.",
+          // data: {data},
+          status: true,
+        });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "Some error occurred while updating email.",
         });
       });
   }
