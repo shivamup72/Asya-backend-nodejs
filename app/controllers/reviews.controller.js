@@ -59,7 +59,7 @@ exports.create = async (req, res) => {
         rating :rating ,
         review : review,
         restaurant_id: restaurant_id,
-        timestamp :timestamp
+        timestamp :Date.now()
     };
     // Save Tutorial in the database
     Reviews.create(reviews)

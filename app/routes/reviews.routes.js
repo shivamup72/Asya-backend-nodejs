@@ -2,7 +2,7 @@ module.exports = app => {
     const Reviews = require("../controllers/reviews.controller");
     var router = require("express").Router();
     // Create a new Tutorial
-   // router.post("/", role.create);
+    router.post("/", Reviews.create);
     // // Retrieve all Tutorials
      router.get("/", Reviews.findAll);
     // // Retrieve all published Tutorials
