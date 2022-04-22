@@ -15,15 +15,15 @@ exports.login = async (req, res) => {
     return;
   }
 
-  console.log("encryptedPassword", encryptedPassword);
+  // console.log("encryptedPassword", encryptedPassword);
   let dd = await Login.findOne({
     where: { email: req.body.email },
   });
 
-  console.log("dd", dd);
+  // console.log("dd", dd);
   if (dd) {
    encryptedPassword = crypto.createHash('sha1').update(req.body.password).digest('hex')
-   console.log('first',encryptedPassword,dd.dataValues.password,'check',encryptedPassword === dd.dataValues.password)
+  // console.log('first',encryptedPassword,dd.dataValues.password,'check',encryptedPassword === dd.dataValues.password)
   
     if (encryptedPassword === dd.dataValues.password) {
       res.status(200).send({
