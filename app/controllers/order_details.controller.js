@@ -8,30 +8,11 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
   const {
-    // code,
-    // menu_id,
-    // customer_id,
-    // customer_address_id,
-    // driver_id,
-    // total_menu_price,
-    // total_delivery_charge,
-    // total_vat_amount,
-    // grand_total
     orderdetails,
   } = req.body;
   console.log("first,", orderdetails, req.body);
 
   if (
-    // !code &&
-    // ! menu_id&&
-    // !customer_id &&
-    // !driver_id&&
-    // !customer_address_id &&
-    // !total_menu_price &&
-    // !total_delivery_charge &&
-    // !total_vat_amount &&
-    // !grand_total
-
     !orderdetails &&
     orderdetails[0] === undefined
   ) {
@@ -40,20 +21,6 @@ exports.create = async (req, res) => {
     });
     return;
   }
-
-  // Create a Tutorial
-  // const cart = {
-  //   customer_id: customer_id,
-  //   menu_id: menu_id,
-  //   restaurant_id: restaurant_id,
-  //   servings: servings,
-  //   quantity: quantity,
-  //   price: pricing,
-  //   note: note,
-  //   addons: addons,
-  //   variant_id: variant_id,
-  // };
-  // Save Tutorial in the database
   Order_details.bulkCreate(orderdetails)
     .then((data) => {
       res.status(200).send({
@@ -70,8 +37,6 @@ exports.create = async (req, res) => {
 
 // /////
 exports.findAll = (req, res) => {
-  // const title = req.query.title;
-  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   Order_details.findAll({
     include: [
       {
