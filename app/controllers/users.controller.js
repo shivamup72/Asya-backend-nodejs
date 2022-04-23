@@ -52,7 +52,7 @@ exports.create = async (req, res) => {
     // Save Tutorial in the database
     Users.create(users)
       .then((data) => {
-        res.status(500).send({
+        res.status(200).send({
           message: "signup successfully.",
           status: true,
            data: {
