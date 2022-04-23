@@ -145,7 +145,7 @@ exports.updateemail = async (req, res) => {
 
   if (ff) {
     res.status(500).send({
-      message: "YThis Email ID allReady Register.",
+      message: "This Email ID allReady Register.",
       // data: {data},
       status: false,
     });
@@ -175,12 +175,42 @@ exports.updateemail = async (req, res) => {
           where: { id: req.body.id },
         }
       )
-        .then(() => {
-          res.status(200).send({
-            message: "update Email successfully.",
-            // data: {data},
-            status: true,
+        .then((data) => {
+          if (data[0] === 1) {
+          Users.findOne({
+            where: { id: req.body.id },
+          })
+            .then((data) => {
+              res.send(
+                {
+                id: data.dataValues.id,
+                first:
+                  data.dataValues.name.split(" ")[0] === null
+                    ? null
+                    : data.dataValues.name.split(" ")[0],
+                last:
+                  data.dataValues.name.split(" ")[1] === null
+                    ? null
+                    : data.dataValues.name.split(" ")[1],
+                phone: data.dataValues.phone,
+                email: data.dataValues.email,
+                thumbnail: data.dataValues.thumbnail,
+              }
+              );
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message:
+                  err.message ||
+                  "Some error occurred while retrieving tutorials.",
+              });
+            });
+        } else {
+          res.status(400).send({
+            status: false,
+            message: "Email update unsuccessfull",
           });
+        }
         })
         .catch((err) => {
           res.status(500).send({
