@@ -54,8 +54,22 @@ exports.create = async (req, res) => {
       .then((data) => {
         res.status(500).send({
           message: "signup successfully.",
-          data: { data },
           status: true,
+           data: {
+            id: data.dataValues.id,
+            first:
+              data.dataValues.name.split(" ")[0] === null
+                ? null
+                : data.dataValues.name.split(" ")[0],
+            last:
+              data.dataValues.name.split(" ")[1] === null
+                ? null
+                : data.dataValues.name.split(" ")[1],
+            phone: data.dataValues.phone,
+            email: data.dataValues.email,
+            thumbnail: data.dataValues.thumbnail,
+          },
+         
         });
       })
       .catch((err) => {
