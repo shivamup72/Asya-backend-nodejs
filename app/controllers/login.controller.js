@@ -20,13 +20,13 @@ exports.login = async (req, res) => {
     where: { email: req.body.email },
   });
 
-  console.log("dd", data);
+  //console.log("dd", data);
   if (data) {
     encryptedPassword = crypto
       .createHash("sha1")
       .update(req.body.password)
       .digest("hex");
-    console.log('first',encryptedPassword,data.dataValues.password,'check',encryptedPassword === data.dataValues.password)
+    // console.log('first',encryptedPassword,data.dataValues.password,'check',encryptedPassword === data.dataValues.password)
 
     if (encryptedPassword === data.dataValues.password) {
       res.status(200).send({
