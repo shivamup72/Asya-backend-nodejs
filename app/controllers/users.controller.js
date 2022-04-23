@@ -192,21 +192,15 @@ exports.updateemail = async (req, res) => {
 };
 
 exports.updatename = async (req, res) => {
-
-   console.log("dd", req.body);
-  let first =
-    req.body.first === null
-      ? ""
-      : req.body.first;
-      let last= req.body.last === null
-      ? ""
-      : req.body.last;
-      let name=first+" "+last;
+  console.log("dd", req.body);
+  let first = req.body.first === null ? "" : req.body.first;
+  let last = req.body.last === null ? "" : req.body.last;
+  let name = first + " " + last;
   console.log("name", name);
   let dd = await Users.findOne({
     where: { name: name, id: req.body.id },
   });
- 
+
   if (dd) {
     res.status(400).send({
       message: "Name AllReady Present",
@@ -228,12 +222,40 @@ exports.updatename = async (req, res) => {
         where: { id: req.body.id },
       }
     )
-      .then(() => {
-        res.status(200).send({
-          message: "update name successfully.",
-          // data: {data},
-          status: true,
-        });
+      .then((data) => {
+        if (data[0] === 1) {
+          Users.findOne({
+            where: { id: req.body.id },
+          })
+            .then((data) => {
+              res.send({
+                id: data.dataValues.id,
+                first:
+                  data.dataValues.name.split(" ")[0] === null
+                    ? null
+                    : data.dataValues.name.split(" ")[0],
+                last:
+                  data.dataValues.name.split(" ")[1] === null
+                    ? null
+                    : data.dataValues.name.split(" ")[1],
+                phone: data.dataValues.phone,
+                email: data.dataValues.email,
+                thumbnail: data.dataValues.thumbnail,
+              });
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message:
+                  err.message ||
+                  "Some error occurred while retrieving tutorials.",
+              });
+            });
+        } else {
+          res.status(400).send({
+            status: false,
+            message: "name update unsuccessfull",
+          });
+        }
       })
       .catch((err) => {
         res.status(500).send({
