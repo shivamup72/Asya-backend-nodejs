@@ -16,23 +16,36 @@ exports.login = async (req, res) => {
   }
 
   // console.log("encryptedPassword", encryptedPassword);
-  let dd = await Login.findOne({
+  let data = await Login.findOne({
     where: { email: req.body.email },
   });
 
-  // console.log("dd", dd);
-  if (dd) {
+  console.log("dd", data);
+  if (data) {
     encryptedPassword = crypto
       .createHash("sha1")
       .update(req.body.password)
       .digest("hex");
-    // console.log('first',encryptedPassword,dd.dataValues.password,'check',encryptedPassword === dd.dataValues.password)
+    console.log('first',encryptedPassword,data.dataValues.password,'check',encryptedPassword === data.dataValues.password)
 
-    if (encryptedPassword === dd.dataValues.password) {
+    if (encryptedPassword === data.dataValues.password) {
       res.status(200).send({
         message: "Login Succeed!",
         status: true,
-        data: dd,
+        data: {
+          id: data.dataValues.id,
+          first:
+            data.dataValues.name.split(" ")[0] === null
+              ? null
+              : data.dataValues.name.split(" ")[0],
+          last:
+            data.dataValues.name.split(" ")[1] === null
+              ? null
+              : data.dataValues.name.split(" ")[1],
+          phone: data.dataValues.phone,
+          email: data.dataValues.email,
+          thumbnail: data.dataValues.thumbnail,
+        },
       });
     } else {
       res.status(400).send({
