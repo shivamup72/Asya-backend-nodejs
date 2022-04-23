@@ -192,17 +192,21 @@ exports.updateemail = async (req, res) => {
 };
 
 exports.updatename = async (req, res) => {
-  let name =
-    req.body.first === undefined
-      ? " "
-      : req.body.first + " " + req.body.last === undefined
-      ? " "
+
+   console.log("dd", req.body);
+  let first =
+    req.body.first === null
+      ? ""
+      : req.body.first;
+      let last= req.body.last === null
+      ? ""
       : req.body.last;
+      let name=first+" "+last;
   console.log("name", name);
   let dd = await Users.findOne({
     where: { name: name, id: req.body.id },
   });
-  console.log("dd", dd);
+ 
   if (dd) {
     res.status(400).send({
       message: "Name AllReady Present",
@@ -226,7 +230,7 @@ exports.updatename = async (req, res) => {
     )
       .then(() => {
         res.status(200).send({
-          message: "update Email successfully.",
+          message: "update name successfully.",
           // data: {data},
           status: true,
         });
