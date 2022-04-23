@@ -107,6 +107,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
+  
   Order_details.findAll({
     where: { order_code: req.params.code },
     include: [
@@ -176,3 +177,4 @@ exports.findOne = (req, res) => {
 //       });
 //     });
 // };
+
