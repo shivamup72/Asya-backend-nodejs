@@ -177,40 +177,42 @@ exports.updateemail = async (req, res) => {
       )
         .then((data) => {
           if (data[0] === 1) {
-          Users.findOne({
-            where: { id: req.body.id },
-          })
-            .then((data) => {
-              res.send(
-                {
-                id: data.dataValues.id,
-                first:
-                  data.dataValues.name.split(" ")[0] === null
-                    ? null
-                    : data.dataValues.name.split(" ")[0],
-                last:
-                  data.dataValues.name.split(" ")[1] === null
-                    ? null
-                    : data.dataValues.name.split(" ")[1],
-                phone: data.dataValues.phone,
-                email: data.dataValues.email,
-                thumbnail: data.dataValues.thumbnail,
-              }
-              );
+            Users.findOne({
+              where: { id: req.body.id },
             })
-            .catch((err) => {
-              res.status(500).send({
-                message:
-                  err.message ||
-                  "Some error occurred while retrieving tutorials.",
+              .then((data) => {
+                res.send({
+                  message: "Update Email Succeed!",
+                  status: true,
+                  data: {
+                    id: data.dataValues.id,
+                    first:
+                      data.dataValues.name.split(" ")[0] === null
+                        ? null
+                        : data.dataValues.name.split(" ")[0],
+                    last:
+                      data.dataValues.name.split(" ")[1] === null
+                        ? null
+                        : data.dataValues.name.split(" ")[1],
+                    phone: data.dataValues.phone,
+                    email: data.dataValues.email,
+                    thumbnail: data.dataValues.thumbnail,
+                  },
+                });
+              })
+              .catch((err) => {
+                res.status(500).send({
+                  message:
+                    err.message ||
+                    "Some error occurred while retrieving tutorials.",
+                });
               });
+          } else {
+            res.status(400).send({
+              status: false,
+              message: "Email update unsuccessfull",
             });
-        } else {
-          res.status(400).send({
-            status: false,
-            message: "Email update unsuccessfull",
-          });
-        }
+          }
         })
         .catch((err) => {
           res.status(500).send({
