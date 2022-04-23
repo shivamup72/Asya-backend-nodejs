@@ -24,7 +24,7 @@ exports.create = async (req, res) => {
       !req.body.first &&
       !req.body.last &&
       !req.body.email &&
-      //!req.body.phone &&
+      !req.body.phone &&
       !req.body.password
     ) {
       res.status(400).send({
@@ -32,16 +32,13 @@ exports.create = async (req, res) => {
       });
       return;
     }
+    let first = req.body.first === null ? " " : req.body.first;
+    let last = req.body.last === null ? " " : req.body.last;
     // Create a Tutorial
     const users = {
-      name:
-        req.body.first === undefined
-          ? " "
-          : req.body.first + " " + req.body.last === undefined
-          ? " "
-          : req.body.last,
+      name: first + " " + last,
       email: req.body.email,
-      // phone: req.body.phone,
+       phone: req.body.phone,
       password: encryptedPassword,
       // status: req.body.status,
       //  thumbnail:'placeholder.png',
@@ -55,7 +52,7 @@ exports.create = async (req, res) => {
         res.status(200).send({
           message: "signup successfully.",
           status: true,
-           data: {
+          data: {
             id: data.dataValues.id,
             first:
               data.dataValues.name.split(" ")[0] === null
@@ -69,7 +66,6 @@ exports.create = async (req, res) => {
             email: data.dataValues.email,
             thumbnail: data.dataValues.thumbnail,
           },
-         
         });
       })
       .catch((err) => {
