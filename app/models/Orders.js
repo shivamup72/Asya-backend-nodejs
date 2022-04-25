@@ -14,7 +14,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     order_placed_at: {
       type: Sequelize.INTEGER,
-      defaultValue:Date.now()
+      //defaultValue:Date.now()
     },
     order_approved_at: {
       type: Sequelize.INTEGER,

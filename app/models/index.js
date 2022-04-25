@@ -34,6 +34,7 @@ db.Payment_settings = require("./Payment_settings")(sequelize, Sequelize);
 db.Orders = require("./Orders")(sequelize, Sequelize);
 db.Order_details = require("./Order_details")(sequelize, Sequelize);
 db.Reviews = require("./Reviews")(sequelize, Sequelize);
+db.Payment = require("./Payment")(sequelize, Sequelize);
 db.sequelize.sync({force:false})
 .then(()=>{
   console.log("yes re sync done")
