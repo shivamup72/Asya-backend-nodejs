@@ -15,9 +15,9 @@ module.exports = (sequelize, Sequelize) => {
       restaurant_id: {
         type: Sequelize.INTEGER,
       },
-      timestamp: {
-        type: Sequelize.INTEGER,
-      },
+      // timestamp: {
+      //   type: Sequelize.INTEGER,
+      // },
     });
     return Reviews;
   };
