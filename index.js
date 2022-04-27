@@ -38,6 +38,7 @@ require("./app/routes/order_details.routes")(app);
 require("./app/routes/payment_settings.routes")(app);
 require("./app/routes/reviews.routes")(app);
 require("./app/routes/payment.routes")(app);
+require("./app/routes/favourites.routes")(app);
 app.use("/uploads", express.static("uploads"));
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {

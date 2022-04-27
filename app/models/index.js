@@ -35,6 +35,7 @@ db.Orders = require("./Orders")(sequelize, Sequelize);
 db.Order_details = require("./Order_details")(sequelize, Sequelize);
 db.Reviews = require("./Reviews")(sequelize, Sequelize);
 db.Payment = require("./Payment")(sequelize, Sequelize);
+db.Favourites = require("./Favourites")(sequelize, Sequelize);
 db.sequelize.sync({force:false})
 .then(()=>{
   console.log("yes re sync done")
@@ -70,5 +71,13 @@ db.Order_details.belongsTo(db.Variant_options ,{as: 'variant',foreignKey:'varian
 
 db.Addons.hasOne(db.Order_details,{foreignKey:'addons',allowNull: true}); 
 db.Order_details.belongsTo(db.Addons,{as: 'addon',foreignKey:'addons',allowNull: true});
+
+
+db.customer.hasOne(db.Favourites,{foreignKey:'customer_id',allowNull: true}); 
+db.Favourites.belongsTo(db.customer,{as: 'customer',foreignKey:'customer_id',allowNull: true});
+
+
+db.Food_menus.hasOne(db.Favourites,{foreignKey:'menu_id',allowNull: true}); 
+db.Favourites.belongsTo(db.Food_menus,{as: 'menu',foreignKey:'menu_id',allowNull: true});
 
 module.exports = db;
