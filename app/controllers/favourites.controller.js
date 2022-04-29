@@ -36,12 +36,6 @@ exports.findAll = (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   Favourites.findAll({
-    // where: {
-    //     $or: [
-    //         {'"B"."userId"' : 100},
-    //         {'"C"."userId"' : 100}
-    //     ]
-    // },
     include: [
       {
         model: Customer,
@@ -93,6 +87,23 @@ exports.findone = (req, res) => {
         message:
           err.message ||
           "Some error occurred while retrieving Food_categories.",
+      });
+    });
+};
+
+exports.remove = (req, res) => {
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  Favourites.destroy({
+    where: { customer_id: req.params.id },})
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message ||
+          "Some error occurred while Deleting Favourites.",
       });
     });
 };
