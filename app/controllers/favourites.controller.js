@@ -94,16 +94,24 @@ exports.findone = (req, res) => {
 exports.remove = (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  console.log("req.params", req.params);
   Favourites.destroy({
-    where: { customer_id: req.params.id },})
+    where: { customer_id: req.params.customerid, menu_id: req.params.menu },
+  })
     .then((data) => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(500).send({
+          message: " No data to delete",
+        });
+      }
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message ||
-          "Some error occurred while Deleting Favourites.",
+          err.message || "Some error occurred while Deleting Favourites.",
       });
     });
 };
