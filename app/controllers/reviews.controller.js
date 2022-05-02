@@ -4,17 +4,17 @@ const Reviews = db.Reviews;
 const Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
-  const { order_code, menu_id, customer_id, rating, review, restaurant_id } =
+  const { add} =
     req.body;
   console.log("first,", req.body);
 
   if (
-    !order_code &&
-    !menu_id &&
-    !customer_id &&
-    !rating &&
-    !review &&
-    !restaurant_id
+    !add.order_code &&
+    !add.menu_id &&
+    !add.customer_id &&
+    !add.rating &&
+    !add.review &&
+    !add.restaurant_id
   ) {
     res.status(400).send({
       message: "Content can not be empty!",
@@ -53,13 +53,12 @@ exports.create = async (req, res) => {
 //   } else {
     // Create a Tutorial
     const reviews = {
-        order_code : order_code,
-        menu_id :menu_id ,
-        customer_id : customer_id,
-        rating :rating ,
-        review : review,
-        restaurant_id: restaurant_id,
-        timestamp :Date.now()
+        order_code :add. order_code,
+        menu_id :add.menu_id ,
+        customer_id :add. customer_id,
+        rating :add.rating ,
+        review :add. review,
+        restaurant_id:add. restaurant_id
     };
     // Save Tutorial in the database
     Reviews.create(reviews)

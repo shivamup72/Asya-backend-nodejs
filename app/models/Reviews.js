@@ -17,6 +17,7 @@ module.exports = (sequelize, Sequelize) => {
       },
      timestamp: {
         type: Sequelize.INTEGER,
+        defaultValue:parseInt(Date.now()/1000)
       }, 
     });
     return Reviews;
