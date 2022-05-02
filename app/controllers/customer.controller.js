@@ -1,9 +1,8 @@
-
 const db = require("../models");
 const Users = require("../models/Users");
 const Customers = db.customer;
 const Op = db.Sequelize.Op;
-// Create and Save a new Tutorial
+// Create and Save a new Tutorial //
 exports.create = async (req, res) => {
   const { address } = req.body;
   console.log("first,", address);
@@ -32,9 +31,9 @@ exports.create = async (req, res) => {
         .then((data) => {
           res.status(200).send({
             status: true,
-            data:data,
+            data: data,
             message: "address update Successfully",
-          })
+          });
         })
         .catch((err) => {
           res.status(500).send({
@@ -203,7 +202,7 @@ exports.updatesecondAddress = async (req, res) => {
 
 exports.updatethirdAddress = async (req, res) => {
   const { user_id, address_3, coordinate_3 } = req.body;
- // console.log("req.body", user_id, address_2, coordinate_2);
+  // console.log("req.body", user_id, address_2, coordinate_2);
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   await Customers.findOne({ where: { user_id: user_id } })
@@ -240,13 +239,10 @@ exports.updatethirdAddress = async (req, res) => {
     });
 };
 
-
-
-
 ///////
 
 exports.deletefirstAddress = async (req, res) => {
-  const { id} = req.params;
+  const { id } = req.params;
   console.log("req.body", id); // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   await Customers.findOne({ where: { user_id: id } })
@@ -283,7 +279,7 @@ exports.deletefirstAddress = async (req, res) => {
 };
 
 exports.deletesecondAddress = async (req, res) => {
-  const { id} = req.params;
+  const { id } = req.params;
   console.log("req.body", id);
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
@@ -302,7 +298,7 @@ exports.deletesecondAddress = async (req, res) => {
           .then((result) =>
             res.status(200).send({
               status: true,
-   
+
               message: "Address Update  Successfully",
             })
           )
@@ -322,7 +318,7 @@ exports.deletesecondAddress = async (req, res) => {
 };
 
 exports.deletethirdAddress = async (req, res) => {
-  const { id} = req.params;
+  const { id } = req.params;
   console.log("req.body", id);
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
