@@ -5,23 +5,17 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Tutorial
 exports.create = async (req, res) => {
   const {
-    order_code,
-    amount_to_pay,
-    amount_paid,
-    payment_method,
-    identifier,
-    data,
+    // order_code,
+    // amount_to_pay,
+    // amount_paid,
+    // payment_method,
+    // identifier,
+    // data,
+    paymetdata,
   } = req.body;
-  console.log("first,", req.body);
+  console.log("first,", paymetdata);
 
-  if (
-    !order_code &&
-    !amount_to_pay &&
-    !amount_paid &&
-    !payment_method &&
-    !identifier &&
-    !data
-  ) {
+  if (!paymetdata) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -30,12 +24,12 @@ exports.create = async (req, res) => {
 
   // Create a Tutorial
   const payment = {
-    order_code: order_code,
-    amount_to_pay: amount_to_pay,
-    amount_paid: amount_paid,
-    payment_method: payment_method,
-    identifier: identifier,
-    data: data,
+    order_code: paymetdata.order_code,
+    amount_to_pay: paymetdata.amount_to_pay,
+    amount_paid: paymetdata.amount_paid,
+    payment_method: paymetdata.payment_method,
+    identifier: paymetdata.identifier,
+    data: paymetdata.data,
   };
   // Save Tutorial in the database
   Payment.create(payment)
@@ -58,7 +52,7 @@ exports.create = async (req, res) => {
 exports.findAll = (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-  Cart.findAll({})
+  Cart.findAll()
     .then((data) => {
       res.send(data);
     })

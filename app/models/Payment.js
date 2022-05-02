@@ -20,6 +20,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     created_at: {
       type: Sequelize.INTEGER,
+      defaultValue:parseInt(Date.now()/1000)
     },
     updated_at: {
       type: Sequelize.INTEGER,
