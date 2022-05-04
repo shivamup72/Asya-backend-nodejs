@@ -80,4 +80,7 @@ db.Favourites.belongsTo(db.customer,{as: 'customer',foreignKey:'customer_id',all
 db.Food_menus.hasOne(db.Favourites,{foreignKey:'menu_id',allowNull: true}); 
 db.Favourites.belongsTo(db.Food_menus,{as: 'menu',foreignKey:'menu_id',allowNull: true});
 
+db.restaurants.hasOne(db.Reviews,{foreignKey:'restaurant_id',allowNull: true}); 
+db.Reviews.belongsTo(db.restaurants,{as: 'restaurant',foreignKey:'restaurant_id',allowNull: true});
+
 module.exports = db;

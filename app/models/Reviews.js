@@ -12,9 +12,9 @@ module.exports = (sequelize, Sequelize) => {
       review: {
         type: Sequelize.TEXT,
       },
-      restaurant_id: {
-        type: Sequelize.INTEGER,
-      },
+      // restaurant_id: {
+      //   type: Sequelize.INTEGER,
+      // },
      timestamp: {
         type: Sequelize.INTEGER,
         defaultValue:parseInt(Date.now()/1000)
