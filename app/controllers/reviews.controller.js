@@ -90,13 +90,13 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   Reviews.findAll({
-    where: { customer_id: req.params.id },
+    where: { customer_id: req.params.cid ,order_code: req.params.oid},
   })
     .then((data) => {
       if (!data || data === null) {
         res.status(400).send({
           status: false,
-          message: "NO cart found",
+          message: "NO review found",
         });
       } else {
         res.send({
@@ -113,6 +113,31 @@ exports.findOne = (req, res) => {
     });
 };
 
+
+exports.findbycid = (req, res) => {
+  Reviews.findAll({
+    where: { customer_id: req.params.cid},
+  })
+    .then((data) => {
+      if (!data || data === null) {
+        res.status(400).send({
+          status: false,
+          message: "NO review found",
+        });
+      } else {
+        res.send({
+          status: true,
+          data: data,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials.",
+      });
+    });
+};
 // exports.removeOne = (req, res) => {
 //   const { customer_id, menu_id } = req.body;
 //   Cart.destroy({ where: { customer_id: customer_id, menu_id: menu_id } })
