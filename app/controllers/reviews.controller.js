@@ -40,7 +40,7 @@ exports.create = async (req, res) => {
         .then((result) =>
           res.status(200).send({
             status: true,
-            message: "cart update  Successfully",
+            message: "Review update  Successfully",
           })
         )
         .catch((err) =>
