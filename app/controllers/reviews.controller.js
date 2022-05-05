@@ -9,7 +9,6 @@ exports.create = async (req, res) => {
 
   if (
     !add.ordercode &&
-    !add.menu_id &&
     !add.customer_id &&
     !add.rating &&
     !add.review &&
@@ -28,7 +27,6 @@ exports.create = async (req, res) => {
     Reviews.update(
       {
         order_code: add.ordercode,
-        menu_id: add.menu_id,
         customer_id: add.customer_id,
         rating: add.rating,
         review: add.review,
@@ -53,7 +51,6 @@ exports.create = async (req, res) => {
     // Create a Tutorial
     const reviews = {
       order_code: add.ordercode,
-      menu_id: add.menu_id,
       customer_id: add.customer_id,
       rating: add.rating,
       review: add.review,
@@ -73,7 +70,7 @@ exports.create = async (req, res) => {
   }
 };
 
-// /////
+///////////////////
 exports.findAll = (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;

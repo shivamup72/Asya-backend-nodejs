@@ -59,7 +59,7 @@ exports.create = async (req, res) => {
               ? ff.coordinate_2
               : address.coordinate_2,
           coordinate_3:
-            ff.coordinate_3 === null ? ff.coordinate_3 : address.coordinate_3,
+          address.coordinate_3 === null ? ff.coordinate_3 : address.coordinate_3,
           user_id: address.user_id === null ? ff.user_id : address.user_id,
           createdAt: Date.now(),
           updatedAt: Date.now(),
