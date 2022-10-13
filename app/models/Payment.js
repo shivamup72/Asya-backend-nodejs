@@ -1,5 +1,11 @@
 module.exports = (sequelize, Sequelize) => {
   const Payment = sequelize.define("payment", {
+    name: {
+      type: Sequelize.STRING,
+    },
+    TransactionKey: {
+      type: Sequelize.STRING,
+    },
     order_code: {
       type: Sequelize.STRING,
     },

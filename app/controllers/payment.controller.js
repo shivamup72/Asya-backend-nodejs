@@ -24,6 +24,8 @@ exports.create = async (req, res) => {
 
   // Create a Tutorial
   const payment = {
+    name: paymetdata.name,
+    TransactionKey:paymetdata.TransactionKey,
     order_code: paymetdata.order_code,
     amount_to_pay: paymetdata.amount_to_pay,
     amount_paid: paymetdata.amount_paid,
